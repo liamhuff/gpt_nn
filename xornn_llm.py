@@ -63,7 +63,8 @@ if __name__ == "__main__":
         total_loss = 0.0
         for x, y in zip(XOR_INPUTS, XOR_LABELS):
             y_hat = net.forward(x)
-            total_loss += float(json.loads(str(net.loss(y, y_hat))))
+            loss_val = json.loads(str(net.loss(y, y_hat)))
+            total_loss += float(loss_val[0] if isinstance(loss_val, list) else loss_val)
             net.backwards(y, y_hat)
         losses.append(total_loss)
 
